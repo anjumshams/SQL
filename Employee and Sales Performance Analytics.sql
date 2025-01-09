@@ -50,30 +50,29 @@ e.Status = 'Active';
 
 /* Calculate Sales per Employee */
 SELECT
-	Name, 
-Department, 
+Name, Department, 
 Sales_Amount /COUNT(EmployeeID) OVER(PARTION BY Department) AS Sales_Per_Employee
 FROM
-	Combined_Dataset;
+Combined_Dataset;
 
 /* Calculate Performance Rating */
 SELECT
-	EmployeeID, Department,
+EmployeeID, Department,
 CASE
 	WHEN Performance_Score >= 85 THEN ‘High_Performer’
 	WHEN Performance_Score >= 70 THEN ‘Mid_Performer’
 	ELSE ‘Low_Performer’
 END AS Performance_Rating;
 FROM
-	Employee_Dataset
+Employee_Dataset
 
 /* Aggregate Sales and Performance by Department */  
 SELECT
-	AVG(Performance_Score) AS Avg_PerformanceScore,
-	SUM(Sales_Amount) AS Total_Sales
+AVG(Performance_Score) AS Avg_PerformanceScore,
+SUM(Sales_Amount) AS Total_Sales
 FROM
 Combined_Dataset
 GROUP BY
-	Department;
+Department;
 
 
